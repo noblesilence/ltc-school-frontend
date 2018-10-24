@@ -1,0 +1,23 @@
+[
+  {
+    "id": "1",
+    "name": "Lesson 1",
+    "youtube_video_id": "lriXI61fe1c",
+    "description": "Statistics: Simple Linear Regression and Correlation",
+    "image_url": ""
+  },
+  {
+    "id": "2",
+    "name": "Lesson 2",
+    "youtube_video_id": "WomLTC2OeC0",
+    "description": "Statistics: Median",
+    "image_url": ""
+  },
+  {
+    "id": "3",
+    "name": "Lesson 3",
+    "youtube_video_id": "mJUiiBbJTLw",
+    "description": "Statistics: Standard Deviation",
+    "image_url": ""
+  }
+]
