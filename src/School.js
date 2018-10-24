@@ -1,8 +1,9 @@
 import React from "react";
+import axios from "axios";
 import Grid from "@material-ui/core/Grid";
 import { withStyles } from "@material-ui/core/styles";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import Navbar from "./Navbar";
-import lessons from "./lessons.json";
 import Lessons from "./Lessons";
 import LessonView from "./LessonView";
 
@@ -34,10 +35,20 @@ class School extends React.Component {
     super(props);
 
     this.state = {
-      currentLessonIndex: 0
+      currentLessonIndex: 0,
+      lessons: null
     };
 
     this.currentLessonIndexChanged = this.currentLessonIndexChanged.bind(this);
+  }
+
+  componentDidMount() {
+    axios
+      .get(
+        "https://tdpcw5gdob.execute-api.us-east-1.amazonaws.com/latest/lessons"
+      )
+      .then(res => this.setState({ lessons: res.data }))
+      .catch(err => console.log(err));
   }
 
   currentLessonIndexChanged(newIndex) {
@@ -45,27 +56,44 @@ class School extends React.Component {
   }
 
   render() {
-    const currentLessonIndex = this.state.currentLessonIndex;
-    const currentLesson = lessons[currentLessonIndex];
     const { classes } = this.props;
+    const { lessons } = this.state;
+    let dashboardContent;
+
+    if (lessons === null) {
+      dashboardContent = (
+        <CircularProgress
+          className={classes.progress}
+          color="secondary"
+          size={50}
+        />
+      );
+    } else {
+      console.log(lessons);
+
+      const currentLessonIndex = this.state.currentLessonIndex;
+      const currentLesson = lessons[currentLessonIndex];
+
+      dashboardContent = (
+        <Grid container spacing={40} className={classes.mainGrid}>
+          <Grid item sm={4} xs={12}>
+            <Lessons
+              lessons={lessons}
+              currentLessonIndex={currentLessonIndex}
+              currentLessonIndexChanged={this.currentLessonIndexChanged}
+            />
+          </Grid>
+          <Grid item sm={8} xs={12}>
+            <LessonView lesson={currentLesson} />
+          </Grid>
+        </Grid>
+      );
+    }
 
     return (
       <div className="App">
         <Navbar />
-        <main className={classes.layout}>
-          <Grid container spacing={40} className={classes.mainGrid}>
-            <Grid item sm={4} xs={12}>
-              <Lessons
-                lessons={lessons}
-                currentLessonIndex={currentLessonIndex}
-                currentLessonIndexChanged={this.currentLessonIndexChanged}
-              />
-            </Grid>
-            <Grid item sm={8} xs={12}>
-              <LessonView lesson={currentLesson} />
-            </Grid>
-          </Grid>
-        </main>
+        <main className={classes.layout}>{dashboardContent}</main>
       </div>
     );
   }

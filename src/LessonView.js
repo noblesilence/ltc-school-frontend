@@ -7,7 +7,7 @@ import YouTube from "react-youtube";
 
 class LessonView extends React.Component {
   render() {
-    const { name, description, youtube_video_id } = this.props.lesson;
+    const { name, description, videoId } = this.props.lesson;
 
     const opts = {
       height: "390",
@@ -29,7 +29,7 @@ class LessonView extends React.Component {
           </Typography>
           <div className="responsive">
             <YouTube
-              videoId={youtube_video_id}
+              videoId={videoId}
               opts={opts}
               onReady={event => {
                 // event.target.pauseVideo();
