@@ -1,11 +1,13 @@
 import React from "react";
-import axios from "axios";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import Grid from "@material-ui/core/Grid";
 import { withStyles } from "@material-ui/core/styles";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import Navbar from "./Navbar";
-import Lessons from "./Lessons";
-import LessonView from "./LessonView";
+import Navbar from "./layout/Navbar";
+import Lessons from "./components/Lessons";
+import LessonView from "./components/LessonView";
+import { getLessons } from "./actions/lessonActions";
 
 const styles = theme => ({
   layout: {
@@ -35,20 +37,21 @@ class School extends React.Component {
     super(props);
 
     this.state = {
-      currentLessonIndex: 0,
-      lessons: null
+      currentLessonIndex: 0
     };
 
     this.currentLessonIndexChanged = this.currentLessonIndexChanged.bind(this);
   }
 
   componentDidMount() {
-    axios
-      .get(
-        "https://tdpcw5gdob.execute-api.us-east-1.amazonaws.com/latest/lessons"
-      )
-      .then(res => this.setState({ lessons: res.data }))
-      .catch(err => console.log(err));
+    this.props.getLessons();
+
+    // axios
+    //   .get(
+    //     "https://tdpcw5gdob.execute-api.us-east-1.amazonaws.com/latest/lessons"
+    //   )
+    //   .then(res => this.setState({ lessons: res.data }))
+    //   .catch(err => console.log(err));
   }
 
   currentLessonIndexChanged(newIndex) {
@@ -57,7 +60,8 @@ class School extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const { lessons } = this.state;
+    const { lessons } = this.props.lessons;
+
     let dashboardContent;
 
     if (lessons === null) {
@@ -104,4 +108,16 @@ class School extends React.Component {
   // }
 }
 
-export default withStyles(styles)(School);
+School.propTypes = {
+  getLessons: PropTypes.func.isRequired,
+  lessons: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  lessons: state.lessons
+});
+
+export default connect(
+  mapStateToProps,
+  { getLessons }
+)(withStyles(styles)(School));
