@@ -21,7 +21,7 @@ class LessonView extends React.Component {
     return (
       <Card>
         <CardContent>
-          <Typography variant="headline" style={{ marginBottom: 5 }}>
+          <Typography variant="h5" style={{ marginBottom: 5 }}>
             {name}
           </Typography>
           <Typography color="textSecondary" style={{ marginBottom: 20 }}>

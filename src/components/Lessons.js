@@ -19,7 +19,7 @@ class Lessons extends Component {
 
     return (
       <Fragment>
-        <Typography variant="headline">Lessons</Typography>
+        <Typography variant="h5">Lessons</Typography>
         <List component="nav">{lessonItems}</List>
       </Fragment>
     );

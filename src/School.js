@@ -45,13 +45,6 @@ class School extends React.Component {
 
   componentDidMount() {
     this.props.getLessons();
-
-    // axios
-    //   .get(
-    //     "https://tdpcw5gdob.execute-api.us-east-1.amazonaws.com/latest/lessons"
-    //   )
-    //   .then(res => this.setState({ lessons: res.data }))
-    //   .catch(err => console.log(err));
   }
 
   currentLessonIndexChanged(newIndex) {
@@ -73,8 +66,6 @@ class School extends React.Component {
         />
       );
     } else {
-      console.log(lessons);
-
       const currentLessonIndex = this.state.currentLessonIndex;
       const currentLesson = lessons[currentLessonIndex];
 
@@ -101,11 +92,6 @@ class School extends React.Component {
       </div>
     );
   }
-
-  // _onReady(event) {
-  //   // access to player in all event handlers via event.target
-  //   event.target.pauseVideo();
-  // }
 }
 
 School.propTypes = {
