@@ -10,6 +10,7 @@ import Navbar from "./components/layout/Navbar";
 import Landing from "./components/layout/Landing";
 import SecuredRoute from "./components/SecuredRoute/SecuredRoute";
 import Dashboard from "./components/dashboard/Dashboard";
+import auth0Client from "./Auth";
 import Callback from "./Callback";
 
 const theme = createMuiTheme({
