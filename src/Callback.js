@@ -5,11 +5,11 @@ import auth0Client from "./Auth";
 class Callback extends Component {
   async componentDidMount() {
     await auth0Client.handleAuthentication();
-    this.props.history.replace("/");
+    this.props.history.replace("/dashboard");
   }
 
   render() {
-    return <p>Loading profile...</p>;
+    return <p>Loading...please wait</p>;
   }
 }
 
