@@ -1,11 +1,12 @@
 import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
-import auth0Client from "../Auth";
+import auth0Client from "../../Auth";
 import AppBar from "@material-ui/core/AppBar";
 import Button from "@material-ui/core/Button";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
+import logo from "../../ltc-logo.jpg";
 
 const styles = theme => ({
   root: {
@@ -31,10 +32,15 @@ function Navbar(props) {
       <AppBar position="static" color="primary">
         <Toolbar>
           <Link to="/">
-            <Typography variant="h6" color="inherit" className={classes.flex}>
-              Learn Teach Center School
-            </Typography>
+            <img
+              src={logo}
+              style={{ width: "40px", margin: "10px", display: "block" }}
+              alt="Learn Teach Center Logo"
+            />
           </Link>
+          <Typography variant="h6" color="inherit" className={classes.flex}>
+            Learn Teach Center School
+          </Typography>
           {!auth0Client.isAuthenticated() && (
             <Fragment>
               <Button

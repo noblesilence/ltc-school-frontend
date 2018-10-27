@@ -1,4 +1,5 @@
 import axios from "axios";
+import auth0Client from "../Auth";
 
 import { LESSONS_LOADING, GET_LESSONS, BACKEND_URL } from "./types";
 
@@ -13,7 +14,9 @@ export const setLessonsLoading = () => {
 export const getLessons = () => dispatch => {
   dispatch(setLessonsLoading());
   axios
-    .get(BACKEND_URL + "/lessons")
+    .get(BACKEND_URL + "/lessons", {
+      headers: { Authorization: `Bearer ${auth0Client.getIdToken()}` }
+    })
     .then(res =>
       dispatch({
         type: GET_LESSONS,

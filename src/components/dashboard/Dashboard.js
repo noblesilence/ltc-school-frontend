@@ -4,10 +4,10 @@ import { connect } from "react-redux";
 import Grid from "@material-ui/core/Grid";
 import { withStyles } from "@material-ui/core/styles";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import Navbar from "./layout/Navbar";
-import Lessons from "./components/Lessons";
-import LessonView from "./components/LessonView";
-import { getLessons } from "./actions/lessonActions";
+import Navbar from "../layout/Navbar";
+import Lessons from "../Lessons/Lessons";
+import LessonView from "../Lesson/LessonView";
+import { getLessons } from "../../actions/lessonActions";
 
 const styles = theme => ({
   layout: {
@@ -32,7 +32,7 @@ const styles = theme => ({
   }
 });
 
-class App extends React.Component {
+class Dashboard extends React.Component {
   constructor(props) {
     super(props);
 
@@ -94,7 +94,7 @@ class App extends React.Component {
   }
 }
 
-School.propTypes = {
+Dashboard.propTypes = {
   getLessons: PropTypes.func.isRequired,
   lessons: PropTypes.object.isRequired
 };
@@ -106,4 +106,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { getLessons }
-)(withStyles(styles)(School));
+)(withStyles(styles)(Dashboard));
